@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     {
         InitRdm();
         GeneticCode.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
+        Test();
     }
 
     // Update is called once per frame
@@ -40,6 +41,21 @@ public class GameManager : MonoBehaviour
     }
 
     void UpdateConstants()
+    {
+
+    }
+
+
+    void Test()
+    {
+        var v1 = new int[3];
+        var v2 = new int[3,4];
+
+        f1(v1);
+        //f1(v2);
+    }
+
+    void f1(int[] arr)
     {
 
     }
