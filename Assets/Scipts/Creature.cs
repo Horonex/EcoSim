@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creature : MonoBehaviour
+public class Creature : MonoBehaviour , IAttackable
 {
+    const int CREATURERANGE = 10;
+    const int CREATUREANGLE = 10;
     const int PHENOTYPEFILLERLENGHT=16;
     /// <summary>
     /// Maximum gentic difference for successful reproduction (percentage)
@@ -115,5 +117,41 @@ public class Creature : MonoBehaviour
         {
 
         }
+    }
+
+    public void Move()
+    {
+
+    }
+    //public void Turn()
+    //{
+
+    //}
+
+    public void Eat()
+    {
+        GetObjectsInZone();
+
+    }
+
+    public void Attack()
+    {
+        GetObjectsInZone();
+
+    }
+
+    public void Signal()
+    {
+
+    }
+
+    private void GetObjectsInZone()
+    {
+
+    }
+
+    public void GetAttacked()
+    {
+        throw new System.NotImplementedException();
     }
 }
