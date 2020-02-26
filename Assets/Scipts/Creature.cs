@@ -130,14 +130,21 @@ public class Creature : MonoBehaviour , IAttackable
 
     public void Eat()
     {
-        GetObjectsInZone();
+        var targets = GetEatable();
+        foreach (var t in targets)
+        {
+            t.GetEaten();
+        }
 
     }
 
     public void Attack()
     {
-        GetObjectsInZone();
-
+        var targets = GetAttackable();
+        foreach (var t in targets)
+        {
+            t.GetAttacked();
+        }
     }
 
     public void Signal()
@@ -145,9 +152,14 @@ public class Creature : MonoBehaviour , IAttackable
 
     }
 
-    private void GetObjectsInZone()
+    private List<IAttackable> GetAttackable()
     {
+        return null;
+    }
 
+    private List<IEatable> GetEatable()
+    {
+        return null;
     }
 
     public void GetAttacked()
