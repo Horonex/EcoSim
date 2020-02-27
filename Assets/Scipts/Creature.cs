@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creature : MonoBehaviour , IAttackable
+public class Creature : SimElement , IAttackable
 {
-    const int CREATURERANGE = 10;
-    const int CREATUREANGLE = 10;
+    public const int CREATURERANGE = 10;
+    public const float CREATUREFOA = 90;
     const int PHENOTYPEFILLERLENGHT=16;
     /// <summary>
     /// Maximum gentic difference for successful reproduction (percentage)
@@ -25,6 +25,10 @@ public class Creature : MonoBehaviour , IAttackable
 
     Dictionary<Nutrient, int> nutrientQuantity;
 
+    public Creature(Vector2 pos)
+    {
+        position = pos;
+    }
 
  
     // Start is called before the first frame update
@@ -34,36 +38,109 @@ public class Creature : MonoBehaviour , IAttackable
         //string s = "";
 
         //Debug.Log(s);
-        Genotype.MutateNumber(mutateNumber);
-        //GeneticCode.MutateCustom();
 
-
-        //int j = 100;
-        //int l = 10;
-
-        //for (int n = 1; n < l; n++)
-        //{
-        //    for (int i = 0; i < j; i++)
-        //    {
-        //        string s = "";
-        //        for (int k = n; k < l; k++)
-        //        {
-        //            s += GeneticCode.GetRandomBase();
-        //        }
-
-        //        string output = s + " -> " + GeneticCode.CheckGeneIntegrity(s);
-
-        //        Debug.Log(output);
-        //    }
-        //}
-
-
-
-
-
+        //Test1();
+        //Test4();
+        //Test5(); 
+        Test6();
 
         //Debug.Log(GetPhenotype());
     }
+
+    void Test6()
+    {
+        SimElement.Add(new SimElement(new Vector2(1, 1)));
+        SimElement.Add(new SimElement(new Vector2(1, 0)));
+        SimElement.Add(new SimElement(new Vector2(0, 1)));
+        SimElement.Add(new SimElement(new Vector2(-1, 0)));
+        SimElement.Add(new SimElement(new Vector2(0, -1)));
+        SimElement.Add(new SimElement(new Vector2(-1, -1)));
+        SimElement.Add(new SimElement(new Vector2(1, -1)));
+        SimElement.Add(new SimElement(new Vector2(-1, 1)));
+        SimElement.Add(new Creature(new Vector2(2, 2)));
+        //SimElement.Add(new Creature(n))
+
+        orientation = new Vector2(1, 0);
+        position = new Vector2(0, 0);
+        Add(this);
+
+        var ir = GetAttackable();
+
+        foreach (var item in ir)
+        {
+            Debug.Log(item.GetAttacked());
+        }
+    }
+
+    void Test5()
+    {
+        SimElement.Add(new SimElement(new Vector2(1,1)));
+        SimElement.Add(new SimElement(new Vector2(1,0)));
+        SimElement.Add(new SimElement(new Vector2(0,1)));
+        SimElement.Add(new SimElement(new Vector2(-1,0)));
+        SimElement.Add(new SimElement(new Vector2(0,-1)));
+        SimElement.Add(new SimElement(new Vector2(2,2)));
+        SimElement.Add(new SimElement(new Vector2(-1,-1)));
+        SimElement.Add(new SimElement(new Vector2(1,-1)));
+        SimElement.Add(new SimElement(new Vector2(-1,1)));
+
+        orientation = new Vector2(1, 0);
+        position = new Vector2(0, 0);
+        Add(this);
+
+        var ir= SimElement.GetInRange(this);
+
+        foreach (var item in ir)
+        {
+            Debug.Log(item.position.x + "," + item.position.y);
+        }
+    }
+    void Test4()
+    {
+        var v1 = new Vector2(1, 1);
+        var v2 = new Vector2(0, 0);
+
+        Debug.Log(Vector2.Angle(v1, v2));
+    }
+    void Test1()
+    {
+        orientation = new Vector2(-1, 1);
+        position = new Vector2(0, 0);
+
+        SimElement simelem = new SimElement();
+        simelem.position = new Vector2(-2, 0);
+        simelem.orientation = new Vector2(2, 2);
+        InRange(simelem, CREATURERANGE, CREATUREFOA);
+    }
+    void Test2()
+    {
+        GeneticCode.MutateCustom();
+
+
+        int j = 100;
+        int l = 10;
+
+        for (int n = 1; n < l; n++)
+        {
+            for (int i = 0; i < j; i++)
+            {
+                string s = "";
+                for (int k = n; k < l; k++)
+                {
+                    s += GeneticCode.GetRandomBase();
+                }
+
+                string output = s + " -> " + GeneticCode.CheckGeneIntegrity(s);
+
+                Debug.Log(output);
+            }
+        }
+    }
+    void Test3()
+    {
+        Genotype.MutateNumber(mutateNumber);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -154,16 +231,36 @@ public class Creature : MonoBehaviour , IAttackable
 
     private List<IAttackable> GetAttackable()
     {
-        return null;
+        var ir = GetInRange(this);
+        var output = new List<IAttackable>();
+        foreach (var item in ir)
+        {
+            if(item is IAttackable)
+            {
+                output.Add((IAttackable)item);
+            }
+        }
+
+        return output;
     }
 
     private List<IEatable> GetEatable()
     {
-        return null;
+        var ir = GetInRange(this);
+        var output = new List<IEatable>();
+        foreach (var item in ir)
+        {
+            if (item is IEatable)
+            {
+                output.Add((IEatable)item);
+            }
+        }
+
+        return output;
     }
 
-    public void GetAttacked()
+    public string GetAttacked()
     {
-        throw new System.NotImplementedException();
+        return position.x + "," + position.y;
     }
 }
