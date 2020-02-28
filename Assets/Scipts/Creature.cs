@@ -23,7 +23,7 @@ public class Creature : SimElement , IAttackable
     List<ProteinBD> proteinBreakDowns;
     List<ProteinS> proteinSynthesis;
 
-    Dictionary<Nutrient, int> nutrientQuantity;
+    Dictionary<string, int> nutrientQuantity;
 
     public Creature(Vector2 pos)
     {
@@ -68,7 +68,7 @@ public class Creature : SimElement , IAttackable
 
         foreach (var item in ir)
         {
-            Debug.Log(item.GetAttacked());
+            //Debug.Log(item.GetAttacked(this));
         }
     }
 
@@ -210,7 +210,7 @@ public class Creature : SimElement , IAttackable
         var targets = GetEatable();
         foreach (var t in targets)
         {
-            t.GetEaten();
+            t.GetEaten(this);
         }
 
     }
@@ -220,7 +220,7 @@ public class Creature : SimElement , IAttackable
         var targets = GetAttackable();
         foreach (var t in targets)
         {
-            t.GetAttacked();
+            t.GetAttacked(this);
         }
     }
 
@@ -259,8 +259,8 @@ public class Creature : SimElement , IAttackable
         return output;
     }
 
-    public string GetAttacked()
+    public void GetAttacked(Creature attacker)
     {
-        return position.x + "," + position.y;
+        //return position.x + "," + position.y;
     }
 }

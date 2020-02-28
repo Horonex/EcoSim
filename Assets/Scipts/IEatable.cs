@@ -9,7 +9,7 @@ namespace Assets.Scipts
     interface IEatable
     {
 
-        void GetEaten();
+        void GetEaten(Creature eater);
 
     }
 }

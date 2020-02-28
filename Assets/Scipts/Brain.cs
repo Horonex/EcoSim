@@ -29,9 +29,9 @@ namespace Assets.Scipts
 
         public Brain(Brain parent,float tweakPourcentage)
         {
-            //75 small
-            //20 big
-            //05 random
+            //90 small
+            //9 big
+            //1 random
         }
 
         public Brain(int inputLenght,int hiddenLenght,int outputLenght,int hiddenLayers=1,NNFillingMode FillingMode=NNFillingMode.random)

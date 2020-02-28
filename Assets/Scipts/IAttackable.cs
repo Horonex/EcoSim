@@ -9,7 +9,7 @@ namespace Assets.Scipts
     interface IAttackable
     {
 
-        string GetAttacked();
+        void GetAttacked(Creature attacker);
 
     }
 }
