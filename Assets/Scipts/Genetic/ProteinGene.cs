@@ -8,6 +8,7 @@ namespace Assets.Scipts
 {
     abstract class ProteinGene : Gene
     {
+
         protected string liaison;
     }
 }

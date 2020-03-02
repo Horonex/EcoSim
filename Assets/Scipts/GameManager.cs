@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scipts;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,8 +19,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InitRdm();
-        GeneticCode.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
+        //Gene.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
         Test();
+
     }
 
     // Update is called once per frame
@@ -40,24 +42,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Test()
+    {
+        string gs1 = "hvhvhvhvhvhvhvhvhvhv";
+        string gs2 = "hvhvhvhvhvhvhvhvhvhxhvhv";
+        string f1 = "xxxxxxxxxx";
+        string f2 = "xxhhxxxxhx";
+
+        var g1 = new GeneticCode(gs1, f1); 
+        var g2 = new GeneticCode(gs2, f2);
+
+        Debug.Log(GeneticCode.Compare(g1, g2));
+
+    }
+
+
+
     void UpdateConstants()
     {
 
     }
 
 
-    void Test()
-    {
-        var v1 = new int[3];
-        var v2 = new int[3,4];
-
-        f1(v1);
-        //f1(v2);
-    }
-
-    void f1(int[] arr)
-    {
-
-    }
+   
 
 }

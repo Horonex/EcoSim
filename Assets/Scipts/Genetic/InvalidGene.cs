@@ -8,21 +8,22 @@ namespace Assets.Scipts
 {
     class InvalidGene : Gene
     {
-        public const int GENELENGTH = 2;
+        new static int geneLength = 2;
 
-        public InvalidGene(string geneticString)
+        public InvalidGene(string gString)
         {
-            this.geneticString = geneticString;
+            geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
+            Prefix = gString.Substring(0, 2);
+
         }
 
         public override string ToString()
         {
             return "INVALID GENE " + geneticString;
         }
-
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-            throw new NotImplementedException();
+            return geneLength;
         }
     }
 }

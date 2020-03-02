@@ -11,9 +11,6 @@ public class Nutrient
 
     public Dictionary<string, List<int>> subStrings;
 
-    
-
-
     public Nutrient(string molecule,int quantity=0)
     {
         this.molecule = molecule;
@@ -56,4 +53,5 @@ public class Nutrient
     {
         quantity--;
     }
+
 }

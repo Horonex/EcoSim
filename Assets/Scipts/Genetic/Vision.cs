@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scipts
 {
     class Vision : Input
     {
-
-        public Vision(string geneticString)
+        new static int geneLength = 7;
+                
+        public Vision(string gString)
         {
-            this.geneticString = geneticString;
+            geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
+            Prefix = gString.Substring(0, 2);
 
         }
 
@@ -21,9 +24,10 @@ namespace Assets.Scipts
 
         }
 
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-            throw new NotImplementedException();
+            return geneLength;
         }
+
     }
 }

@@ -8,12 +8,15 @@ namespace Assets.Scipts
 {
     class ProteinBD:ProteinGene
     {
-        public const int GENELENGTH=4;
+        new static int geneLength = 4;
 
-        public ProteinBD(string geneticString)
+        public ProteinBD(string gString)
         {
-            this.geneticString = geneticString;
+
+
+            geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
             liaison = geneticString.Substring(2);
+            Prefix = gString.Substring(0, 2);
 
         }
 
@@ -23,9 +26,10 @@ namespace Assets.Scipts
             return "PROTEINBREAKDOWN " + liaison;
         }
 
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-            throw new NotImplementedException();
+            return geneLength;
         }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Assets.Scipts
 {
     class Stat:Gene
     {
-        public const int GENELENGTH = 8;
+        new static int geneLength = 8;
         const int TYPELENGTH = 2;
         public static readonly int[,] CLAMPVALUES = new int[16, 2] {
             { 0, 2 },
@@ -33,9 +33,10 @@ namespace Assets.Scipts
         StatType type;
         int value;
    
-        public Stat(string geneticString)
+        public Stat(string gString)
         {
-            this.geneticString = geneticString;
+            geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
+            Prefix = gString.Substring(0, 2);
             SetType();
             SetValue();
         }
@@ -53,10 +54,9 @@ namespace Assets.Scipts
         {
             return "STAT " + type + ": " + value.ToString();
         }
-
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-           //expressedOn.
+            return geneLength;
         }
 
     }

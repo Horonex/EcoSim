@@ -8,22 +8,22 @@ namespace Assets.Scipts
 {
     class ProteinS:ProteinGene
     {
-        public const int GENELENGTH = 4;
+        new static int geneLength = 4;
 
-        public ProteinS(string geneticString)
+        public ProteinS(string gString)
         {
-            this.geneticString = geneticString;
+            geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
             liaison = geneticString.Substring(2);
+            Prefix = gString.Substring(0, 2);
         }
 
         public override string ToString()
         {
             return "PROTEINSYNTHESIS " + liaison;
         }
-
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-            throw new NotImplementedException();
+            return geneLength;
         }
 
     }

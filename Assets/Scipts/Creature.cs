@@ -34,7 +34,7 @@ public class Creature : SimElement , IAttackable
     // Start is called before the first frame update
     void Start()
     {
-        Genotype = new GeneticCode(setGCode);
+        //Genotype = new GeneticCode(setGCode);
         //string s = "";
 
         //Debug.Log(s);
@@ -42,105 +42,15 @@ public class Creature : SimElement , IAttackable
         //Test1();
         //Test4();
         //Test5(); 
-        Test6();
+        //Test6();
 
         //Debug.Log(GetPhenotype());
     }
 
-    void Test6()
-    {
-        SimElement.Add(new SimElement(new Vector2(1, 1)));
-        SimElement.Add(new SimElement(new Vector2(1, 0)));
-        SimElement.Add(new SimElement(new Vector2(0, 1)));
-        SimElement.Add(new SimElement(new Vector2(-1, 0)));
-        SimElement.Add(new SimElement(new Vector2(0, -1)));
-        SimElement.Add(new SimElement(new Vector2(-1, -1)));
-        SimElement.Add(new SimElement(new Vector2(1, -1)));
-        SimElement.Add(new SimElement(new Vector2(-1, 1)));
-        SimElement.Add(new Creature(new Vector2(2, 2)));
-        //SimElement.Add(new Creature(n))
 
-        orientation = new Vector2(1, 0);
-        position = new Vector2(0, 0);
-        Add(this);
+    #region tests
 
-        var ir = GetAttackable();
-
-        foreach (var item in ir)
-        {
-            //Debug.Log(item.GetAttacked(this));
-        }
-    }
-
-    void Test5()
-    {
-        SimElement.Add(new SimElement(new Vector2(1,1)));
-        SimElement.Add(new SimElement(new Vector2(1,0)));
-        SimElement.Add(new SimElement(new Vector2(0,1)));
-        SimElement.Add(new SimElement(new Vector2(-1,0)));
-        SimElement.Add(new SimElement(new Vector2(0,-1)));
-        SimElement.Add(new SimElement(new Vector2(2,2)));
-        SimElement.Add(new SimElement(new Vector2(-1,-1)));
-        SimElement.Add(new SimElement(new Vector2(1,-1)));
-        SimElement.Add(new SimElement(new Vector2(-1,1)));
-
-        orientation = new Vector2(1, 0);
-        position = new Vector2(0, 0);
-        Add(this);
-
-        var ir= SimElement.GetInRange(this);
-
-        foreach (var item in ir)
-        {
-            Debug.Log(item.position.x + "," + item.position.y);
-        }
-    }
-    void Test4()
-    {
-        var v1 = new Vector2(1, 1);
-        var v2 = new Vector2(0, 0);
-
-        Debug.Log(Vector2.Angle(v1, v2));
-    }
-    void Test1()
-    {
-        orientation = new Vector2(-1, 1);
-        position = new Vector2(0, 0);
-
-        SimElement simelem = new SimElement();
-        simelem.position = new Vector2(-2, 0);
-        simelem.orientation = new Vector2(2, 2);
-        InRange(simelem, CREATURERANGE, CREATUREFOA);
-    }
-    void Test2()
-    {
-        GeneticCode.MutateCustom();
-
-
-        int j = 100;
-        int l = 10;
-
-        for (int n = 1; n < l; n++)
-        {
-            for (int i = 0; i < j; i++)
-            {
-                string s = "";
-                for (int k = n; k < l; k++)
-                {
-                    s += GeneticCode.GetRandomBase();
-                }
-
-                string output = s + " -> " + GeneticCode.CheckGeneIntegrity(s);
-
-                Debug.Log(output);
-            }
-        }
-    }
-    void Test3()
-    {
-        Genotype.MutateNumber(mutateNumber);
-    }
-
+    #endregion
 
     // Update is called once per frame
     void Update()

@@ -8,10 +8,13 @@ namespace Assets.Scipts
 {
     class Hearing : Input
     {
-        public Hearing(string geneticString)
-        {
-            this.geneticString = geneticString;
+        new static int geneLength = 7;
 
+
+        public Hearing(string gString)
+        {
+            geneticString = Pad(gString,geneLength-gString.Length).Substring(0,geneLength);
+            Prefix = gString.Substring(0, 2);
         }
 
         public override string ToString()
@@ -19,11 +22,11 @@ namespace Assets.Scipts
             return "INPUT HEARING " + geneticString.Substring(3);
 
         }
-
-        public override void Express(Creature expressedOn)
+        public override int GetLength()
         {
-            throw new NotImplementedException();
+            return geneLength;
         }
+
 
     }
 }
