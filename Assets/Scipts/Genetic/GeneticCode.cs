@@ -38,6 +38,7 @@ public class GeneticCode
     }
     public GeneticCode(GeneticCode parent)
     {
+        
         genes = new List<Gene>();
         foreach (var g in parent.GetGenes())
         {
@@ -47,8 +48,8 @@ public class GeneticCode
             }
         }
         fillerCode = parent.MutateFiller();
+        decoded = true;
     }
-
 
     private void Encode()
     {
@@ -258,9 +259,9 @@ public class GeneticCode
 
         CompareFiller(g1.fillerCode, g2.fillerCode, ref success, ref fail);
 
+        Debug.Log(success + "s");
+        Debug.Log(fail + "f");
 
-        Debug.Log(success);
-        Debug.Log(fail);
         return (float)success / (float)(success + fail);
     }
     /// <summary>
@@ -360,35 +361,39 @@ public class GeneticCode
     /// <returns></returns>
     string MutateFiller()
     {
-        List<int> indexs = new List<int>();
+        string nFiller = fillerCode;
+
+        //List<int> indexs = new List<int>();
         for (int i = 0; i < fillerLength; i++)
         {
             if (Random.Range(0, Gene.MutationINSERTIONrate) == 0)
             {
-                indexs.Add(i);
+                nFiller.Remove(i, 1);
+                nFiller.Insert(i, GetRandomBase().ToString());
             }
         }
-        StringBuilder sBuilder = new StringBuilder();
-        var indexArray = indexs.ToArray();
-        for (int i = 0; i < indexArray.Length; i++)
-        {
-            if (i == 0)
-            {
-                sBuilder.Append(GetFiller().Substring(0, indexArray[0]));
-                sBuilder.Append(GetRandomBase());
-            }
-            else if (i == indexArray.Length - 1)
-            {
-                sBuilder.Append(GetFiller().Substring(indexArray[i]) + 1);
-            }
-            else
-            {
-                sBuilder.Append(GetFiller().Substring(indexArray[i] + 1, indexArray[i + 1] - indexArray[i] - 1));
-                sBuilder.Append(GetRandomBase());
-            }
-        }
+        //StringBuilder sBuilder = new StringBuilder();
+        //var indexArray = indexs.ToArray();
+        //for (int i = 0; i < indexArray.Length; i++)
+        //{
+        //    if (i == 0)
+        //    {
+        //        sBuilder.Append(GetFiller().Substring(0, indexArray[0]));
+        //        GetFiller().
+        //        sBuilder.Append(GetRandomBase());
+        //    }
+        //    else if (i == indexArray.Length - 1)
+        //    {
+        //        sBuilder.Append(GetFiller().Substring(indexArray[i]) + 1);
+        //    }
+        //    else
+        //    {
+        //        sBuilder.Append(GetFiller().Substring(indexArray[i] + 1, indexArray[i + 1] - indexArray[i] - 1));
+        //        sBuilder.Append(GetRandomBase());
+        //    }
+        //}
 
-        return sBuilder.ToString();
+        return nFiller;
     }
 
     string GetGenesToString()
@@ -407,32 +412,17 @@ public class GeneticCode
 
     #region tests
 
-    //public void MutateNumber(int times)
-    //{
-    //    GeneticCode newGC = this;
-    //    float[] diffs = new float[10];
-    //    for (int i = 0; i < times; i++)
-    //    {
-    //        newGC = new GeneticCode(newGC.Mutate());
-    //        newGC.Decode();
-    //        //Debug.Log(newGC.genes.Count);
-    //        Debug.Log(newGC.GetGenesToString() + newGC.GetFillerLenght());
-    //    }
+    public GeneticCode[] MutateNumber(int times)
+    {
+        GeneticCode[] gCodes = new GeneticCode[times];
+        gCodes[0] = this;
+        for (int i = 1; i < times; i++)
+        {
+            gCodes[i] = new GeneticCode(gCodes[i - 1]);
+        }
+        return gCodes;
+    }
 
-    //}
-
-    //public static void MutateCustom(string genome)
-    //{
-    //    GeneticCode newGC = new GeneticCode(genome);
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        Debug.Log(newGC.Mutate());
-    //    }
-    //}
-    //public static void MutateCustom()
-    //{
-    //    MutateCustom("HHOXXHHHHOXXHHXXXXXXXXXXXX");
-    //}
 
     public int GetFillerLenght()
     {
@@ -449,6 +439,16 @@ public class GeneticCode
             s += g.ToString() + "\n";
         }
         return s;
+    }
+
+    public static string GetNewFiller()
+    {
+        StringBuilder sBuilder = new StringBuilder();
+        for(int i=0;i<fillerLength;i++)
+        {
+            sBuilder.Append(GetRandomBase());
+        }
+        return sBuilder.ToString();
     }
 
 }

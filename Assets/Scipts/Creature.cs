@@ -39,16 +39,13 @@ public class Creature : SimElement , IAttackable
 
         //Debug.Log(s);
 
-        //Test1();
-        //Test4();
-        //Test5(); 
-        //Test6();
-
         //Debug.Log(GetPhenotype());
     }
 
 
     #region tests
+    
+
 
     #endregion
 

@@ -233,14 +233,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSeed: 1
-  seed: 123123124
+  seed: 123123123
   useSavedRandomState: 0
   rState:
     s0: 0
     s1: 0
     s2: 0
     s3: 0
-  dupRate: 1000
+  dupRate: 1
   inverRate: 1000
   supRate: 1100
   inserRate: 1000
@@ -288,6 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a483da8a04faeaf4188339323d606f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  orientation: {x: 0, y: 0}
   setGCode: HHHVOXXHHOVHOXHHOOHOXHHVVOVXHVHXHVOOHVXHHVXOHVOXHOOOHOVXHOOVHXHHHVOXXXXOVOHXOVHOXHVHVOXHVXHVVHXOOHVXOHVXOVH
   mutateNumber: 1000
   stats: 050000000c0000003b990600ea000000ab0c00002b02000000000000000000000000000000000000000000000000000000000000000000000000000000000000

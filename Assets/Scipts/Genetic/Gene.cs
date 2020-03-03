@@ -95,14 +95,10 @@ namespace Assets.Scipts
                 case "XV":
 
                 case "XO":
-                    {
-                        //genes.Add(new InvalidGene(genome.Substring(readHead, InvalidGene.GENELENGTH)));
-                        //readHead += InvalidGene.GENELENGTH;
-                        break;
-                    }
+
                 case "XX":
                     {
-                        break;
+                        return new InvalidGene(gString);
                     }
             }
             return null;
@@ -132,7 +128,8 @@ namespace Assets.Scipts
 
             if (duplicationR == 0)
             {
-                output.Add(GetNewGene(geneticString));
+                Debug.Log("duplicate");
+                output.Add(GetNewGene(getGeneticString()));
             }
             if (!(supressionR == 0))
             {
@@ -156,6 +153,7 @@ namespace Assets.Scipts
 
         private void Invert()
         {
+            Debug.Log("invert");
             StringBuilder sBuilder = new StringBuilder();
             for (int i = geneticString.Length; i > 0; i--)
             {
@@ -166,6 +164,7 @@ namespace Assets.Scipts
 
         private void Insert()
         {
+            Debug.Log("insert");
             int rIndex = Random.Range(0, geneticString.Length);
             geneticString.Remove(rIndex, 1);
             string add = "" + GeneticCode.GetRandomBase();
