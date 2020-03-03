@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(GeneticCode.Compare(GC, g[i]));
         }
-        Debug.Log(g[number - 1].GetRaw() + g[number - 1].GetFiller());
+        Debug.Log(g[number - 1].GetRaw() +" "+ g[number - 1].GetFiller());
     }
     void Test3()
     {
