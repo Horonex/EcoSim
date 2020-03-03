@@ -20,9 +20,10 @@ public class GameManager : MonoBehaviour
     {
         InitRdm();
         Gene.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
-        //Test2();
+       
+        Test2();
         //Test();
-        Test3();
+        //Test3();
 
 
     }
@@ -63,15 +64,13 @@ public class GameManager : MonoBehaviour
     {
         GeneticCode GC = new GeneticCode("HVHVHVHVHVHVHVHVHVHXHVHV", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         Debug.Log(GC.GetRaw());
-        var g= GC.MutateNumber(100);
+        int number = 1000;
+        var g= GC.MutateNumber(number);
         for (int i = 0; i < g.Length; i++)
         {
             Debug.Log(GeneticCode.Compare(GC, g[i]));
         }
-        Debug.Log(GC.GetRaw());
-        Debug.Log(g[99].GetRaw());
-        Debug.Log(GC.Compare(g[99]));
-
+        Debug.Log(g[number - 1].GetRaw() + g[number - 1].GetFiller());
     }
     void Test3()
     {
@@ -79,8 +78,6 @@ public class GameManager : MonoBehaviour
         var g2 = new GeneticCode(g1);
         Debug.Log(g1.GetRaw());
         Debug.Log(g2.GetRaw());
-
-
 
         Debug.Log(GeneticCode.Compare(g1, g2));
     }

@@ -259,8 +259,8 @@ public class GeneticCode
 
         CompareFiller(g1.fillerCode, g2.fillerCode, ref success, ref fail);
 
-        Debug.Log(success + "s");
-        Debug.Log(fail + "f");
+        //Debug.Log(success + "s");
+        //Debug.Log(fail + "f");
 
         return (float)success / (float)(success + fail);
     }
@@ -364,34 +364,14 @@ public class GeneticCode
         string nFiller = fillerCode;
 
         //List<int> indexs = new List<int>();
-        for (int i = 0; i < fillerLength; i++)
+        for (int i = 0; i < nFiller.Length; i++)
         {
             if (Random.Range(0, Gene.MutationINSERTIONrate) == 0)
             {
-                nFiller.Remove(i, 1);
-                nFiller.Insert(i, GetRandomBase().ToString());
+                nFiller = nFiller.Remove(i, 1);
+                nFiller = nFiller.Insert(i, GetRandomBase().ToString());
             }
         }
-        //StringBuilder sBuilder = new StringBuilder();
-        //var indexArray = indexs.ToArray();
-        //for (int i = 0; i < indexArray.Length; i++)
-        //{
-        //    if (i == 0)
-        //    {
-        //        sBuilder.Append(GetFiller().Substring(0, indexArray[0]));
-        //        GetFiller().
-        //        sBuilder.Append(GetRandomBase());
-        //    }
-        //    else if (i == indexArray.Length - 1)
-        //    {
-        //        sBuilder.Append(GetFiller().Substring(indexArray[i]) + 1);
-        //    }
-        //    else
-        //    {
-        //        sBuilder.Append(GetFiller().Substring(indexArray[i] + 1, indexArray[i + 1] - indexArray[i] - 1));
-        //        sBuilder.Append(GetRandomBase());
-        //    }
-        //}
 
         return nFiller;
     }

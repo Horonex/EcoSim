@@ -1,4 +1,4 @@
-﻿using Assets.Scipts;
+﻿    using Assets.Scipts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -125,35 +125,36 @@ namespace Assets.Scipts
 
             List<Gene> output = new List<Gene>();
 
+            Gene temp = GetNewGene(getGeneticString());
 
             if (duplicationR == 0)
             {
-                Debug.Log("duplicate");
+                //Debug.Log("duplicate");
                 output.Add(GetNewGene(getGeneticString()));
             }
             if (!(supressionR == 0))
             {
                 if (inversionR == 0)
                 {
-                    Invert();
+                    temp.Invert();
                     
                 }
                 if (insertionR == 0)
                 {
-                    Insert();
+                    temp.Insert();
                 }
-
+                output.Add(temp);
             }
 
             //newGenes += newGene;
             //oldGenes += CheckGeneIntegrity(oldGene);
 
-            return new List<Gene>() {this };
+            return output;
         }
 
         private void Invert()
         {
-            Debug.Log("invert");
+            //Debug.Log("invert");
             StringBuilder sBuilder = new StringBuilder();
             for (int i = geneticString.Length; i > 0; i--)
             {
@@ -164,7 +165,7 @@ namespace Assets.Scipts
 
         private void Insert()
         {
-            Debug.Log("insert");
+            //Debug.Log("insert");
             int rIndex = Random.Range(0, geneticString.Length);
             geneticString.Remove(rIndex, 1);
             string add = "" + GeneticCode.GetRandomBase();
