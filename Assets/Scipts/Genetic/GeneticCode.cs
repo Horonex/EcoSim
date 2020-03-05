@@ -17,8 +17,8 @@ public class GeneticCode
 
     public GeneticCode(string genotype,string filler, bool checkValidity = true)
     {
-        genotype= genotype.ToUpper();
-        filler=filler.ToUpper();
+        genotype = genotype.ToUpper();
+        filler = filler.ToUpper();
         bool isValid = true;
         if (checkValidity)
         {

@@ -11,19 +11,19 @@ public class Creature : SimElement , IAttackable
     /// <summary>
     /// Maximum gentic difference for successful reproduction (percentage)
     /// </summary>
-    static float MAXGENDIFFREP = 0.05f;
-
+    public static float MAXGENDIFFREP = 0.05f;
 
     public GeneticCode Genotype;
     [SerializeField] string setGCode;
     [SerializeField] int mutateNumber=10;
 
-    [SerializeField] public int[] stats = new int[16];
-
     List<ProteinBD> proteinBreakDowns;
     List<ProteinS> proteinSynthesis;
 
-    Dictionary<string, int> nutrientQuantity;
+    Stats stats;
+
+
+    //Dictionary<string, int> nutrientQuantity;
 
     public Creature(Vector2 pos)
     {
@@ -62,39 +62,12 @@ public class Creature : SimElement , IAttackable
 
     public string GetPhenotype()
     {
-        ClampStats();
         string pheno = "";
-        for (int i = 0; i < stats.Length; i++)
-        {
-            for (int j = 10; j < Stat.CLAMPVALUES[i, 1]; j *= 10)
-            {
-                if (stats[i] / j <= 0)
-                {
-                    pheno += 0;
-                }
-            }
-            pheno += stats[i];
-        }        
+        pheno += stats.GetPheno();
         pheno += Genotype.GetFiller().Substring(2, PHENOTYPEFILLERLENGHT);
         return pheno;
     }
     
-    void ClampStats()
-    {
-        stats[0] = stats[0] % (Stat.CLAMPVALUES[0, 1] - Stat.CLAMPVALUES[0, 0]+1) + Stat.CLAMPVALUES[0, 0];
-        for (int i = 1; i < stats.Length; i++)
-        {
-            if (stats[i] < Stat.CLAMPVALUES[i, 0])
-            {
-                stats[i] = Stat.CLAMPVALUES[i, 0];
-            }
-            else if(stats[i] > Stat.CLAMPVALUES[i, 1])
-            {
-                stats[i] = Stat.CLAMPVALUES[i, 1];
-            }
-        }
-    }
-
     public void Reproduce(Creature other)
     {
         if(Genotype.Compare(other.Genotype)>1 -MAXGENDIFFREP)
@@ -102,6 +75,11 @@ public class Creature : SimElement , IAttackable
 
         }
     }
+    public void Reproduce()
+    {
+
+    }
+
 
     public void Move()
     {
@@ -170,4 +148,20 @@ public class Creature : SimElement , IAttackable
     {
         //return position.x + "," + position.y;
     }
+
+    public void AddEnergie(int amount)
+    {
+        stats.energy+= amount;
+        if(stats.energy < 0)
+        {
+            Die();
+        }
+    }
+
+
+    void Die()
+    {
+
+    }
+
 }
