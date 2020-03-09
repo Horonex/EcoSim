@@ -14,6 +14,7 @@ namespace Assets.Scipts
         int hiddenLayers;
 
         double[,] inputNodes;
+        string[] inputTypes;
         double[][,] hiddenNodes;
         double[,] outputNodes;
 
@@ -38,6 +39,22 @@ namespace Assets.Scipts
         {
             InitBrainSize(inputLenght, hiddenLenght, outputLenght, hiddenLayers);
             FillBrain(FillingMode);
+        }
+
+
+        public Brain(SortedList<Input,int> inputs)
+        {
+            
+
+            //hp
+            //energy
+            //vision
+            //earing
+            //pheromones
+            //
+
+
+
         }
 
         private void InitBrainSize(int inputLenght, int hiddenLenght, int outputLenght, int hiddenLayers)

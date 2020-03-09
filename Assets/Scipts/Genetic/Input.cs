@@ -9,6 +9,8 @@ namespace Assets.Scipts
 {
     abstract public class Input:Gene
     {
+        private enum Type { vision,earing,pheromone };
+        private Type type;
 
         public static Input GetNewInput(string gString)
         {
@@ -36,6 +38,15 @@ namespace Assets.Scipts
             return null;
         }
 
+        public static SortedList<Input,int> ToSortedList(List<Input> list)
+        {
+            var output = new SortedList<Input, int>();
+            foreach (var item in list)
+            {
+                output.Add(item, (int)item.type);
+            }
+            return output;
+        }
 
     }
 }
