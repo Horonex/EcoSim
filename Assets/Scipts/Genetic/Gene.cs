@@ -72,7 +72,7 @@ namespace Assets.Scipts
                     }
                 case "HX":
                     {
-                        return new Stat(gString);
+                        return new StatGene(gString);
                     }
                 case "VH":
 

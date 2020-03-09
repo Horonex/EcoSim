@@ -62,15 +62,22 @@ public class GameManager : MonoBehaviour
 
     void Test2()
     {
+        int reproduceNumber = 0;
         GeneticCode GC = new GeneticCode("HVHVHVHVHVHVHVHVHVHXHVHV", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         Debug.Log(GC.GetRaw());
-        int number = 1000;
+        int number = 100;
         var g= GC.MutateNumber(number);
         for (int i = 0; i < g.Length; i++)
         {
-            Debug.Log(GeneticCode.Compare(GC, g[i]));
+            var r = GeneticCode.Compare(GC, g[i]);
+            Debug.Log(r);
+            if(r>1-Creature.MAXGENDIFFREP)
+            {
+                reproduceNumber++;
+            }
         }
         Debug.Log(g[number - 1].GetRaw() +" "+ g[number - 1].GetFiller());
+        Debug.Log(reproduceNumber);
     }
     void Test3()
     {

@@ -13,10 +13,20 @@ namespace Assets.Scipts
 
         Dictionary<string, Nutrient> nutrients = new Dictionary<string, Nutrient>();
 
+        List<ProteinGene> chemicalGenes;
+
 
         public Stomac(Creature owner)
         {
             this.owner = owner;
+            chemicalGenes = new List<ProteinGene>();
+            foreach (var g in owner.Genotype.GetGenes())
+            {
+                if(g is ProteinGene)
+                {
+                    chemicalGenes.Add((ProteinGene)g);
+                }
+            }
         }
 
         private void React()
@@ -49,6 +59,8 @@ namespace Assets.Scipts
 
         private void Split(Nutrient nutrient,string sString)
         {
+
+
             nutrient.Decrease();
             int cutIndex = Random.Range(0,nutrient.subStrings[sString].Count);
 

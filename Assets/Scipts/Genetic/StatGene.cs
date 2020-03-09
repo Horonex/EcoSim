@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    class Stat:Gene
+    class StatGene:Gene
     {
         new static int geneLength = 8;
         const int TYPELENGTH = 2;
         public static readonly int[,] CLAMPVALUES = new int[16, 2] {
-            { 0, 2 },
             { 0, 1023 },
             { 0, 1023 },
             { 0, 4095 },
@@ -26,14 +25,15 @@ namespace Assets.Scipts
             { 0, 0 },
             { 0, 0 },
             { 0, 0 },
+            { 0, 0 },
             { 0, 0 } };
 
-        public enum StatType { sex,size,speed,gestationTime,gestationMaturity,strength}
+        public enum StatType { size,speed,gestationTime,gestationMaturity,strength}
 
-        StatType type;
-        int value;
+        public StatType type;
+        public int value;
    
-        public Stat(string gString)
+        public StatGene(string gString)
         {
             geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
             Prefix = gString.Substring(0, 2);
