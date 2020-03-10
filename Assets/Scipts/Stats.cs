@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    class Stats
+    public class Stats
     {
         public int size, hp, maxHp, energy, maxEnergy;
 

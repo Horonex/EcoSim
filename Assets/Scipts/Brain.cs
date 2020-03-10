@@ -61,7 +61,6 @@ namespace Assets.Scipts
             FillBrain(FillingMode);
         }
 
-
         public Brain(SortedList<Input,int> inputs, Brain parent)
         {
             
@@ -163,7 +162,7 @@ namespace Assets.Scipts
 
         private float[,] DuplicateArray(float[,] item)
         {
-            var output = new double[item.GetLength(0), item.GetLength(1)];
+            var output = new float[item.GetLength(0), item.GetLength(1)];
             for (int i = 0; i < item.GetLength(0); i++)
             {
                 for (int j = 0 ; j < item.GetLength(0); j++)
@@ -175,7 +174,7 @@ namespace Assets.Scipts
         }
         private float[,] DuplicateArray(float[,] item, float tweakPourcentage)
         {
-            var output = new double[item.GetLength(0), item.GetLength(1)];
+            var output = new float[item.GetLength(0), item.GetLength(1)];
             for (int i = 0; i < item.GetLength(0); i++)
             {
                 for (int j = 0; j < item.GetLength(0); j++)
@@ -187,5 +186,14 @@ namespace Assets.Scipts
             return output;
         }
 
+        public void GatherInfo(Creature senser)
+        {
+
+        }
+
+        public void Evaluate()
+        {
+
+        }
     }
 }

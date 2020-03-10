@@ -293,7 +293,7 @@ public class GeneticCode
 
         foreach (var g in g1)
         {
-            string s = g.getGeneticString();
+            string s = g.GetGeneticString();
             if (!geneCount.ContainsKey(s))
             {
                 geneCount.Add(s, 1);
@@ -305,7 +305,7 @@ public class GeneticCode
         }
         foreach (var g in g2)
         {
-            string s = g.getGeneticString();
+            string s = g.GetGeneticString();
             if (geneCount.ContainsKey(s) && geneCount[s] > 0)
             {
                 geneCount[s]--;
@@ -382,7 +382,7 @@ public class GeneticCode
         var builder = new StringBuilder();
         foreach (var g in genes)
         {
-            var s = g.getGeneticString();
+            var s = g.GetGeneticString();
             builder.Append(s);
         }
         return builder.ToString();

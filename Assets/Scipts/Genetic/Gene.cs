@@ -1,4 +1,4 @@
-﻿    using Assets.Scipts;
+﻿using Assets.Scipts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -106,14 +106,14 @@ namespace Assets.Scipts
 
         public abstract int GetLength();
 
-        public string getGeneticString()
+        public string GetGeneticString()
         {
             return geneticString;
         }
 
         public override string ToString()
         {
-            return getGeneticString();
+            return GetGeneticString();
         }
 
         public List<Gene> Mutate()
@@ -125,12 +125,12 @@ namespace Assets.Scipts
 
             List<Gene> output = new List<Gene>();
 
-            Gene temp = GetNewGene(getGeneticString());
+            Gene temp = GetNewGene(GetGeneticString());
 
             if (duplicationR == 0)
             {
                 //Debug.Log("duplicate");
-                output.Add(GetNewGene(getGeneticString()));
+                output.Add(GetNewGene(GetGeneticString()));
             }
             if (!(supressionR == 0))
             {

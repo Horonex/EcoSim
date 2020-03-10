@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int supRate;
     [SerializeField] int inserRate;
 
+    HashSet<Creature> creatures;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +92,32 @@ public class GameManager : MonoBehaviour
         Debug.Log(GeneticCode.Compare(g1, g2));
     }
 
+    void Tick()
+    {
+        //gather info
+        foreach (var c in creatures)
+        {
+            c.GatherInfo();
+        }
+        //evaluate NN
+        foreach (var c in creatures)
+        {
+            c.EvaluateNN();
+        }
+        //perform action
+        foreach (var c in creatures)
+        {
+            c.PerformAction();
+        }
+        //resolve action
+        //move
+        foreach (var c in creatures)
+        {
+            c.Move();
+        }
 
+
+    }
 
     void UpdateConstants()
     {

@@ -20,7 +20,9 @@ public class Creature : SimElement , IAttackable
     List<ProteinBD> proteinBreakDowns;
     List<ProteinS> proteinSynthesis;
 
-    Stats stats;
+    public Stats stats;
+
+    private Brain brain;
 
 
     //Dictionary<string, int> nutrientQuantity;
@@ -81,7 +83,7 @@ public class Creature : SimElement , IAttackable
     }
 
 
-    public void Move()
+    public void MoveTo()
     {
 
     }
@@ -158,6 +160,34 @@ public class Creature : SimElement , IAttackable
         }
     }
 
+    public void Scream(string dialogue, float force)
+    {
+
+    }
+
+    #region lifeCycle
+
+    public void GatherInfo()
+    {
+        brain.GatherInfo(this);
+    }
+
+    public void EvaluateNN()
+    {
+        brain.Evaluate();
+    }
+
+    public void PerformAction()
+    {
+
+    }
+
+    public void Move()
+    {
+
+    }
+
+    #endregion
 
     void Die()
     {

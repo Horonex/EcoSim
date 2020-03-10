@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    class StatGene:Gene
+    public class StatGene:Gene
     {
         new static int geneLength = 8;
         const int TYPELENGTH = 2;
