@@ -1,0 +1,4 @@
+energy cost
+no empty gene
+NN creation
+NN evaluation
