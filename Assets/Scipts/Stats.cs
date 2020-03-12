@@ -8,12 +8,46 @@ namespace Assets.Scipts
 {
     public class Stats
     {
-        public int size, hp, maxHp, energy, maxEnergy;
 
+
+        #region stats
+        public int size, hp, maxHp, energy, maxEnergy;
         int GestationTime;
         int GestationMaturity;
         int speed;
         int strength;
+        #endregion
+        #region inputs
+        #region vision
+        int vDistance;
+        int vAngle;
+        int vOrientation;
+        int vNightVision;
+        int vEye;
+        #endregion
+        #region earing
+        int eSensitivity;
+        int ePrecition;
+        int eEars;
+        #endregion
+        #region pheromone
+        HashSet<string> phero;
+        #endregion
+        #endregion
+        #region protein 
+
+        List<ProteinBD> pBreakedown;
+        List<ProteinS> pSynthesis;
+        internal List<ProteinBD> PBreakedown { get => pBreakedown; set => pBreakedown = value; }
+        internal List<ProteinS> PSynthesis { get => pSynthesis; set => pSynthesis = value; }
+
+        #endregion
+        #region brain
+        int tweakPercentage;
+        int hiddenLayers;
+        #endregion
+
+
 
 
         public Stats(List<StatGene> sGenes)
@@ -63,14 +97,27 @@ namespace Assets.Scipts
         void ClampAll()
         {
             Clamp(ref size, 1, 4096);
-            Clamp(ref speed, 0, 1024);
-            Clamp(ref strength, 0, 1024);
+            Clamp(ref speed);
+            Clamp(ref strength);
             Clamp(ref GestationMaturity, 0, 128);
-            Clamp(ref GestationTime, 0, 1024);
+            Clamp(ref GestationTime);
+
+            Clamp(ref vDistance);
+            Clamp(ref vAngle);
+            Clamp(ref vOrientation);
+            Clamp(ref vNightVision);
+            Clamp(ref vEye,0,64);
+
+            Clamp(ref eSensitivity);
+            Clamp(ref ePrecition);
+            Clamp(ref eEars,0,64);
+
+            Clamp(ref tweakPercentage,0,256);
+            Clamp(ref hiddenLayers,16);
 
         }
 
-        void Clamp(ref int stat,int min,int max)
+        void Clamp(ref int stat, int min = 0, int max = 1024)
         {
             if(stat<min)
             {

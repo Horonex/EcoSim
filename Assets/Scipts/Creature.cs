@@ -17,12 +17,14 @@ public class Creature : SimElement , IAttackable
     [SerializeField] string setGCode;
     [SerializeField] int mutateNumber=10;
 
-    List<ProteinBD> proteinBreakDowns;
-    List<ProteinS> proteinSynthesis;
+    //List<ProteinBD> proteinBreakDowns;
+    //List<ProteinS> proteinSynthesis;
 
     public Stats stats;
 
     private Brain brain;
+
+    private Stomac stomac;
 
 
     //Dictionary<string, int> nutrientQuantity;

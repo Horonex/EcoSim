@@ -31,10 +31,88 @@ namespace Assets.Scipts
 
         private void React()
         {
+            int reactionAffinity = 0;
+            foreach(var n in nutrients.Values)
+            {
+                reactionAffinity+= n.quantity;
+            }
+            //reactionAffinity*= temperature;
+
+            reactionAffinity = (int)Mathf.Sqrt(reactionAffinity);
+            for(int i=0;i<reactionAffinity;i++)
+            {
+                ReactOnce();
+            }
+        }
+
+        private void ReactOnce()
+        {
+            var PBD= owner.stats.PBreakedown.ToArray();
+            var PS = owner.stats.PSynthesis.ToArray();
+            int rand = Random.Range(0, PBD.Length + PS.Length);
+
+            if(rand<PBD.Length)
+            {
+                string substring = PBD[rand].liaison;
+                var n = GetWithSubstring(substring);
+                Split(n[Random.Range(0,n.Length-1)], substring);
+            }
+            else
+            {
+                rand -= PBD.Length;
+                var tails = GetWithEnding(PS[rand].liaison[1]);
+                var heads = GetWithStarting(PS[rand].liaison[0]);
+                Fuse(heads[Random.Range(0, heads.Length - 1)], tails[Random.Range(0, heads.Length - 1)]);
+            }
 
         }
 
+        private Nutrient[] GetWithSubstring(string substring)
+        {
+            var output = new List<Nutrient>();
 
+            foreach (var n in nutrients.Values)
+            {
+                if (n.subStrings.ContainsKey(substring) && n.quantity > 0)
+                {
+                    output.Add(n);
+                }
+            }
+
+            return output.ToArray();
+        }
+        private Nutrient[] GetWithStarting(char c)
+        {
+            var output = new List<Nutrient>();
+
+            foreach (var n in nutrients.Values)
+            {
+                if (n.molecule[0]==c&&n.quantity>0)
+                {
+                    output.Add(n);
+                }
+            }
+
+            return output.ToArray();
+        }
+        private Nutrient[] GetWithEnding(char c)
+        {
+            var output = new List<Nutrient>();
+
+            foreach (var n in nutrients.Values)
+            {
+                if (n.molecule[n.molecule.Length-1] == c && n.quantity > 0)
+                {
+                    output.Add(n);
+                }
+            }
+
+            return output.ToArray();
+        }
+
+
+
+        //eating
         public void Add(Nutrient item)
         {
             if(nutrients.ContainsKey(item.molecule))
@@ -49,6 +127,8 @@ namespace Assets.Scipts
             }
         }
 
+
+        //chem reactions
         private void Fuse(Nutrient head,Nutrient tail)
         {
             head.Decrease();
@@ -56,7 +136,6 @@ namespace Assets.Scipts
             Nutrient newNutrient = new Nutrient(head.molecule + tail.molecule, 1);
             Add(newNutrient);
         }
-
         private void Split(Nutrient nutrient,string sString)
         {
 

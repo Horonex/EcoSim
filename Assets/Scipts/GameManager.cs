@@ -23,7 +23,14 @@ public class GameManager : MonoBehaviour
     {
         InitRdm();
         Gene.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
-       
+
+
+
+        Debug.Log(Random.Range(0, 100));
+        Debug.Log(Random.Range(0, 100));
+        Debug.Log(Random.Range(0, 100));
+
+
         Test2();
         //Test();
         //Test3();
