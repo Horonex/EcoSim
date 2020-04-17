@@ -1,4 +1,5 @@
-energy cost
-no empty gene
 NN creation
 NN evaluation
+prengancy
+no empty gene
+energy cost

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scipts
 {
@@ -59,5 +60,97 @@ namespace Assets.Scipts
             return geneLength;
         }
 
+        public override void Express(Creature owner)
+        {
+
+            int value = GeneticCode.ToInt(geneticString.Substring(4));
+            switch (geneticString.Substring(2, 2))
+            {
+                default:
+                    {
+                        break;
+                    }
+                case "HH":
+                    {
+                        
+                        break;
+                    }
+                case "HV":
+                    {
+                        owner.stats.size += value;
+                        break;
+                    }
+                case "HO":
+                    {
+                        owner.stats.speed += value;
+                        break;
+                    }
+                case "HX":
+                    {
+                        owner.stats.GestationTime += value;
+                        break;
+                    }
+                case "VH":
+                    {
+                        owner.stats.GestationMaturity += value;
+                        break;
+                    }
+                case "VV":
+                    {
+                        owner.stats.strength += value;
+                        break;
+                    }
+                case "VO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "VX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+            }
+        }
     }
 }

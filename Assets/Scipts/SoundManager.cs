@@ -1,4 +1,5 @@
 ﻿using Assets.Scipts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class SoundManager : MonoBehaviour
 
 
 
-    List<Sound> sounds;
+    public static List<Sound> sounds=new List<Sound>();
 
     public void AddSound(Sound s)
     {
@@ -59,6 +60,21 @@ public class SoundManager : MonoBehaviour
                 output.Add(s.wave, s.force - dis);
             }
         }
+        return output;
+    }
+
+    internal SortedList<float, Sound> GetHearable(Creature listener)
+    {
+        SortedList<float, Sound> output = new SortedList<float, Sound>();
+        foreach (var s in sounds)
+        {
+            float f = s.force - listener.GetDistance(s);
+            if(f>0)
+            {
+                output.Add(f, s);
+            }
+        }
+
         return output;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    class ProteinBD:ProteinGene
+    public class ProteinBD:ProteinGene
     {
         new static int geneLength = 4;
 
@@ -31,5 +31,10 @@ namespace Assets.Scipts
             return geneLength;
         }
 
+        public override void Express(Creature owner)
+        {
+            owner.stomac.chemicalGenes.Add(this);
+            owner.stats.pBreakedown.Add(this);
+        }
     }
 }

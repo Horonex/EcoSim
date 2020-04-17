@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace Assets.Scipts
 {
-    class Stomac
+    public class Stomac
     {
         Creature owner;
 
         Dictionary<string, Nutrient> nutrients = new Dictionary<string, Nutrient>();
 
-        List<ProteinGene> chemicalGenes;
+        public List<ProteinGene> chemicalGenes;
 
 
         public Stomac(Creature owner)

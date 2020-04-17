@@ -7,9 +7,11 @@ using UnityEngine;
 
 namespace Assets.Scipts
 {
-    class Vision : Input
+    public class Vision : Input
     {
         new static int geneLength = 7;
+
+        const int eyeNumberModTreshold = 15;
                 
         public Vision(string gString)
         {
@@ -29,5 +31,101 @@ namespace Assets.Scipts
             return geneLength;
         }
 
+        public override void Express(Creature owner)
+        {
+            switch(geneticString.Substring(3,2))
+            {
+                default:
+                    {
+                        break;
+                    }
+                case "HH":
+                    {
+                        owner.stats.vDistance++;
+                        break;
+                    }
+                case "HV":
+                    {
+                        owner.stats.vDistance--;
+                        break;
+                    }
+                case "HO":
+                    {
+                        owner.stats.vAngle++;
+                        break;
+                    }
+                case "HX":
+                    {
+                        owner.stats.vAngle--;
+                        break;
+                    }
+                case "VH":
+                    {
+                        owner.stats.vOrientation++;
+                        break;
+                    }
+                case "VV":
+                    {
+                        owner.stats.vOrientation--;
+                        break;
+                    }
+                case "VO":
+                    {
+                        owner.stats.vNightVision++;
+                        break;
+                    }
+                case "VX":
+                    {
+                        owner.stats.vNightVision--;
+                        break;
+                    }
+                case "OH":
+                    {
+                        if(GeneticCode.ToInt(geneticString.Substring(5))>=eyeNumberModTreshold)
+                        {
+                            owner.stats.vEye++;
+                        }
+                        break;
+                    }
+                case "OV":
+                    {
+                        if (GeneticCode.ToInt(geneticString.Substring(5)) >= eyeNumberModTreshold)
+                        {
+                            owner.stats.vEye--;
+                        }
+                        break;
+                    }
+                case "OO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+            }
+        }
     }
 }

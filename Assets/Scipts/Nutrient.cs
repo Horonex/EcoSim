@@ -9,6 +9,7 @@ public class Nutrient
     [SerializeField] public string molecule;
     [SerializeField] public int quantity;
 
+
     static Dictionary<string, int> conectionEnergie = new Dictionary<string, int>(16) {
         { "HH", 1 }, { "HV", -1 },{"HO",1},{"HX",-1},
         { "VH", -2 }, { "VV", -1 },{"VO",2},{"VX",-2},

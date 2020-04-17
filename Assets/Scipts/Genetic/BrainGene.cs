@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scipts
 {
-    class InvalidGene : Gene
+    public class BrainGene : Gene
     {
-        new static int geneLength = 2;
+        static new int geneLength = 7;
 
-        public InvalidGene(string gString)
+
+        public BrainGene(string gString)
         {
             geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
-            Prefix = gString.Substring(0, 2);
-
-        }
-
-        public override string ToString()
-        {
-            return "INVALID GENE " + geneticString;
-        }
-        public override int GetLength()
-        {
-            return geneLength;
         }
 
         public override void Express(Creature owner)
         {
             throw new NotImplementedException();
         }
+
+        public override int GetLength()
+        {
+            return geneLength;
+        }
     }
+
 }

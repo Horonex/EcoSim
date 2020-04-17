@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    abstract class ProteinGene : Gene
+    public abstract class ProteinGene : Gene
     {
 
         public string liaison;

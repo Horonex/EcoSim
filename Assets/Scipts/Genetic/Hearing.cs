@@ -10,6 +10,8 @@ namespace Assets.Scipts
     {
         new static int geneLength = 7;
 
+        const int earNumberModTreshold = 15;
+
 
         public Hearing(string gString)
         {
@@ -27,6 +29,101 @@ namespace Assets.Scipts
             return geneLength;
         }
 
-
+        public override void Express(Creature owner)
+        {
+            switch (geneticString.Substring(3, 2))
+            {
+                default:
+                    {
+                        break;
+                    }
+                case "HH":
+                    {
+                        owner.stats.eSensitivity++;
+                        break;
+                    }
+                case "HV":
+                    {
+                        owner.stats.eSensitivity--;
+                        break;
+                    }
+                case "HO":
+                    {          
+                        if (GeneticCode.ToInt(geneticString.Substring(5)) >= earNumberModTreshold)
+                        {
+                            owner.stats.eEars++;
+                        }
+                        break;
+                    }
+                case "HX":
+                    {
+                        if (GeneticCode.ToInt(geneticString.Substring(5)) >= earNumberModTreshold)
+                        {
+                            owner.stats.eEars--;
+                        }
+                        break;
+                    }
+                case "VH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "VV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "VO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "VX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "OX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XH":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XV":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XO":
+                    {
+                        //owner.stats
+                        break;
+                    }
+                case "XX":
+                    {
+                        //owner.stats
+                        break;
+                    }
+            }
+        }
     }
 }

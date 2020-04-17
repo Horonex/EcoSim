@@ -6,31 +6,24 @@ using System.Threading.Tasks;
 
 namespace Assets.Scipts
 {
-    class ProteinSensibility : Input 
+    class OutputGene:Gene
     {
-
         new static int geneLength = 7;
 
 
-        public ProteinSensibility(string gString)
+        public OutputGene(string gString)
         {
             geneticString = Pad(gString, geneLength - gString.Length).Substring(0, geneLength);
-            Prefix = gString.Substring(0, 2);
-        }
-
-        public override string ToString()
-        {
-            return "INPUT PROTEIN " + geneticString.Substring(3);
-
-        }
-        public override int GetLength()
-        {
-            return geneLength;
         }
 
         public override void Express(Creature owner)
         {
             throw new NotImplementedException();
+        }
+
+        public override int GetLength()
+        {
+            return geneLength;
         }
     }
 }

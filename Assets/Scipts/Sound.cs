@@ -17,14 +17,30 @@ namespace Assets.Scipts
             wave = dialogue;
             this.force = force;
             this.position = position;
+            SoundManager.instance.AddSound(this);
         }
 
-        public Sound(Creature moving,float speed)
+        public static void New(Creature moving,float speed)
         {
-            wave = " ";
-            force = speed * moving.stats.size;
-            position = moving.position;
+
+            var wave = " ";
+            var force = speed * moving.stats.size;
+            var position = moving.position;
+            new Sound(wave,force,position);
         }
 
+        public static void New(string dialogue,float force,Vector2 position)
+        {
+            new Sound(dialogue, force, position);
+        }
+
+        public override string GetPheno()
+        {
+            return "";
+        }
+
+        public override void Tick()
+        {
+        }
     }
 }

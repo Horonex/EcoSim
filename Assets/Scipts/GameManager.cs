@@ -15,27 +15,44 @@ public class GameManager : MonoBehaviour
     [SerializeField] int supRate;
     [SerializeField] int inserRate;
 
-    HashSet<Creature> creatures;
+    [SerializeField] Creature toInst;
+    [SerializeField] Creature toPrint;
 
+    public HashSet<Creature> creatures;
+    const int MaxCreature = 1000;
+
+    public static GameManager instance;
+
+    public int time = 0;
+
+    int test = 0;
+    int maxTest = -1;
+
+    float lastTick = 0;
+    public float TimeBetweenTick;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         InitRdm();
         Gene.SetMutationConstants(duplication: dupRate, inversion: inverRate, supression: supRate, insertion: inserRate);
 
+        creatures = new HashSet<Creature>();
+        var fill = GeneticCode.GetNewFiller();
+        SpawnCreature(new GeneticCode("HXHOOOOOHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", fill));
+        SpawnCreature(new GeneticCode("HXHVHHHxHXHOhhhxHXHOhhhxHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", fill));
 
 
-        Debug.Log(Random.Range(0, 100));
-        Debug.Log(Random.Range(0, 100));
-        Debug.Log(Random.Range(0, 100));
-
-
-        Test2();
-        //Test();
-        //Test3();
-
-
+        Tick();
+    }
+    private void Awake()
+    {
+        
     }
 
     // Update is called once per frame
@@ -56,82 +73,96 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Test()
-    {
-        string gs1 = "HVHVHVHVHVHVHVHVHVHXHVHV";
-        string gs2 = "HVHVVHVHHVHVVHVHHVHXHVHV";
-        string f1 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        string f2 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-
-        var g1 = new GeneticCode(gs1, f1);
-        var g2 = new GeneticCode(gs2, f2);
-
-        Debug.Log(GeneticCode.Compare(g1, g2));
-
-    }
-
-    void Test2()
-    {
-        int reproduceNumber = 0;
-        GeneticCode GC = new GeneticCode("HVHVHVHVHVHVHVHVHVHXHVHV", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        Debug.Log(GC.GetRaw());
-        int number = 100;
-        var g= GC.MutateNumber(number);
-        for (int i = 0; i < g.Length; i++)
-        {
-            var r = GeneticCode.Compare(GC, g[i]);
-            Debug.Log(r);
-            if(r>1-Creature.MAXGENDIFFREP)
-            {
-                reproduceNumber++;
-            }
-        }
-        Debug.Log(g[number - 1].GetRaw() +" "+ g[number - 1].GetFiller());
-        Debug.Log(reproduceNumber);
-    }
-    void Test3()
-    {
-        var g1 = new GeneticCode("HVHVHVHVHVHVHVHVHVHXHVHV", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        var g2 = new GeneticCode(g1);
-        Debug.Log(g1.GetRaw());
-        Debug.Log(g2.GetRaw());
-
-        Debug.Log(GeneticCode.Compare(g1, g2));
-    }
-
     void Tick()
     {
+        lastTick = Time.time;
+        HashSet<Creature> ticking = new HashSet<Creature>(creatures);
+
+
         //gather info
-        foreach (var c in creatures)
+        foreach (var c in ticking)
         {
             c.GatherInfo();
         }
         //evaluate NN
-        foreach (var c in creatures)
+        foreach (var c in ticking)
         {
             c.EvaluateNN();
         }
         //perform action
-        foreach (var c in creatures)
+        foreach (var c in ticking)
         {
-            c.PerformAction();
+            //c.PerformAction();
+            c.PerformAction(Creature.actionTypes.attack);
+            c.PerformAction(Creature.actionTypes.eat);
+            c.PerformAction(Creature.actionTypes.reproduce);
+            c.PerformAction(Creature.actionTypes.scream);
+            //c.PerformAction(Creature.actionTypes.signal);
         }
         //resolve action
-        //move
-        foreach (var c in creatures)
+        foreach (var c in ticking)
         {
-            c.Move();
+            c.ResolveActions();
         }
 
+        //move
+        foreach (var c in ticking)
+        {
+            c.PerformAction(Creature.actionTypes.move);
+        }
 
+        TickNext();
+        test++;
+        time++;
+        Debug.Log(creatures.Count);
+        
     }
 
-    void UpdateConstants()
+    void TickNext()
     {
+        if (test != maxTest)
+        {
+            var t = Time.time - lastTick;
 
+            if (t > TimeBetweenTick)
+            {
+                Tick();
+            }
+            else
+            {
+                Invoke("Tick", TimeBetweenTick - t);
+            }
+        }
     }
 
 
-   
+    public void SpawnCreature(Brain brain,GeneticCode GCode)
+    {
+        if (creatures.Count < MaxCreature)
+        {
+
+            Creature newCreature = Instantiate(toInst);
+
+            newCreature.Init(brain, GCode, new Vector2(0, 0), new Vector2(1, 0));
+
+            creatures.Add(newCreature);
+        }
+
+        //creatures.Add()
+    }
+    public void SpawnCreature(GeneticCode GCode)
+    {
+        if(creatures.Count<MaxCreature)
+        {
+
+        Creature newCreature = Instantiate(toInst);
+
+            newCreature.Init(BrainMaker.OneSizeBrain(newCreature), GCode,new Vector2(0,0),new Vector2(1,0));
+
+
+        creatures.Add(newCreature);
+        }
+    }
+
 
 }

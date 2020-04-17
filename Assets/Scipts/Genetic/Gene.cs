@@ -203,6 +203,8 @@ namespace Assets.Scipts
             return sBuilder.ToString();
         }
 
+        public abstract void Express(Creature owner);
+
 
     }
 }
